@@ -1,0 +1,9 @@
+#version 130
+in vec4 vPosition;
+out vec4 flocation;
+uniform mat4 world2light;
+void main(){
+	flocation=world2light*vPosition;
+	gl_Position=vec4(flocation.xyz,1);
+	flocation=vec4((flocation.x+1)/2,(flocation.y+1)/2,(flocation.z+1)/2,1);
+} 

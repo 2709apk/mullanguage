@@ -1,0 +1,35 @@
+#!/bin/bash
+CLASSPATH=gluegen-rt-natives-linux-amd64.jar:gluegen-rt.jar:jogl-all-natives-linux-amd64.jar:jogl-all.jar
+APP=$1
+PARA=$*
+FILENAME=${2/.java/}
+PARAMENTS=$3
+GPU=""
+if [ "gpu" = $1 ]; then
+	APP=$2
+	FILENAME=${3/.java/}
+	PARAMENTS=$4
+	GPU="primusrun "
+fi
+
+if [ "java" = $APP ]; then
+	RUN="$GPU $APP -cp .:$CLASSPATH $FILENAME $PARAMENTS"
+	echo $RUN
+	$RUN
+fi
+if [ "Java" = $APP ]; then
+	RUN="$GPU $APP -cp .:$CLASSPATH $FILENAME $PARAMENTS"
+	echo $RUN
+	$RUN
+fi
+if [ "javac" = $APP ]; then
+	RUN="$APP -cp $CLASSPATH $FILENAME.java $PARAMENTS"
+	echo $RUN
+	$RUN
+fi
+if [ "Javac" = $APP ]; then
+	RUN="$APP -cp $CLASSPATH $FILENAME.java $PARAMENTS"
+	echo $RUN
+	$RUN
+fi
+echo $?

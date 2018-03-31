@@ -1,0 +1,47 @@
+#!/bin/bash
+if [ -z $1 ]; then
+	echo 终止
+	exit
+fi
+
+CLASSPATH=gluegen-rt-natives-linux-amd64.jar:gluegen-rt.jar:jogl-all-natives-linux-amd64.jar:jogl-all.jar
+APP=$1
+PARA=$*
+FILENAME=${2/.java/}
+GPU=
+NEXTPARA=$*
+NEXTPARA=${NEXTPARA:${#1}+1}
+NEXTPARA=${NEXTPARA:${#2}+1}
+
+if [ "g" = $1 ]; then
+	APP=$2
+	FILENAME=${3/.java/}
+	NEXTPARA=${NEXTPARA:${#3}+1}
+	GPU="primusrun "
+	echo -e "\033[31;1m"
+else
+	echo -e "\033[1m"
+fi
+#jdccsdcsdcdcdskjhjmhj
+
+if [ "java" = $APP ]; then
+	RUN="$GPU $APP -cp .:$CLASSPATH $FILENAME"
+	echo -e "$RUN\033[0m"
+	$RUN
+fi
+if [ "Java" = $APP ]; then
+	RUN="$GPU $APP -cp .:$CLASSPATH $FILENAME"
+	echo -e "$RUN\033[0m"
+	$RUN
+fi
+if [ "javac" = $APP ]; then
+	RUN="$APP -cp .:$CLASSPATH $FILENAME.java"
+	echo -e "$RUN\033[0m"
+	$RUN
+fi
+if [ "Javac" = $APP ]; then
+	RUN="$APP -cp .:$CLASSPATH $FILENAME.java"
+	echo -e "$RUN\033[0m"
+	$RUN
+fi
+./ji $NEXTPARA

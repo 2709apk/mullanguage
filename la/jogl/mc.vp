@@ -1,0 +1,22 @@
+#version 130
+in vec4 vPosition;
+in vec4 color;
+in vec4 normal;
+uniform mat4 world2view;
+uniform mat4 world2light;
+out vec4 fcolor; 
+out vec4 lightnor;
+out vec4 viewloc; 
+out vec4 lightloc;
+uniform int time;
+// out vec3 star;
+void main() 
+{
+	viewloc = world2view*vPosition;
+	lightloc = world2light*vPosition;
+	lightloc = vec4((lightloc.x+1)/2,(lightloc.y+1)/2,(lightloc.z+1)/2,1);
+	gl_Position = viewloc;
+	lightnor = vec4((world2light*normal).xyz,1); 
+	fcolor = color; 
+	// star = vec3();
+}

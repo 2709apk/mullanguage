@@ -1,0 +1,14 @@
+#!/bin/bash
+cd /home/x/Desktop/Java
+args1=$1
+args2=
+if [ -z $2 ]; then
+	args2=none
+fi
+
+if [ "all" = $1 ]; then
+	google-chrome file:///home/x/Desktop/jdk8/api/allclasses-noframe.html
+else
+	java FindJavaDoc $1 $2
+fi
+
